@@ -4,23 +4,16 @@
 #include "mbed.h"
 #include "HCSR04.h"
 #include "HCSR04Blocking.h"
-#include "SG90.h"
-// Определяем пины для сервопривода и ультразвукового датчика
+#include "SG90.h" // Определяем пины для сервопривода и ультразвукового датчика
 PwmOut servo(D9);
 DigitalOut trig(D7);
-DigitalIn echo(D6);
-
-// Таймер для измерения времени эхо-сигнала
+DigitalIn echo(D6); // Таймер для измерения времени эхо-сигнала
 Timer timer;
-
-// Пороговое расстояние для открытия шлагбаума (в сантиметрах)
-const float DISTANCE_THRESHOLD = 30.0; // 20 см
-
+const float DISTANCE_THRESHOLD = 30.0;  // Пороговое расстояние для открытия шлагбаума (в сантиметрах)
 // Функция для установки угла сервопривода
 void set_servo_angle(PwmOut &servo, float angle) {
-    // Рассчитаем длительность импульса на основе угла
-    float pulse_width = 0.001 + (angle / 180.0) * 0.001;
-    servo.pulsewidth(pulse_width);
+float pulse_width = 0.001 + (angle / 180.0) * 0.001; // Рассчитаем длительность импульса на основе угла
+servo.pulsewidth(pulse_width);
 }
 
 // Функция для получения расстояния от ультразвукового датчика
